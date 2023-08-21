@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useSelector, useDispatch } from "react-redux";
+import { incrementNumber, decrementNumber } from "./Action/index";
 
 function App() {
+  const mystate = useSelector((state) => state.incDec);
+  const dispatch = useDispatch();
+
+  const handleMinusClick = () => {
+    dispatch(decrementNumber()); // Invoke the decrementNumber action creator
+  };
+
+  const handlePlusClick = () => {
+    dispatch(incrementNumber()); // Invoke the incrementNumber action creator
+  };
+
+  console.log("state value is");
+  console.log(mystate);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <button type="button" onClick={handleMinusClick}>Minus</button>
+      <input type="text" value={mystate} readOnly />
+      <button type="button" onClick={handlePlusClick}>Plus</button>
     </div>
   );
 }
